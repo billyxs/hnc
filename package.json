@@ -1,0 +1,77 @@
+{
+  "name": "hacker-news-cli",
+  "version": "1.0.0",
+  "description": "Get it",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billyxs/hacker-cli.git"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:examples": "node examples/",
+    "cover": "cross-env BABEL_ENV=commonjs istanbul cover _mocha -- --compilers js:babel-register --recursive",
+    "lint": "eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "build": "cross-env BABEL_ENV=commonjs babel src --out-dir bin --source-maps",
+    "flow": "flow",
+    "prepublish": "npm run clean && npm run build && npm run test"
+  },
+  "author": "Billy Montgomery billy.montgomery@gmail.com",
+  "license": "MIT",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "bin": {
+    "hn": "bin/index.js",
+    "hackernews": "bin/index.js"
+  },
+  "files": [
+    "src",
+    "bin"
+  ],
+  "keywords": [
+    "slack",
+    "cli",
+    "node"
+  ],
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-runtime": "^6.23.0",
+    "chalk": "^2.3.0",
+    "change-case": "^3.0.1",
+    "inquirer": "^4.0.0",
+    "inquirer-chalk-pipe": "^1.2.0",
+    "js-yaml": "^3.9.0",
+    "lodash": "^4.17.4",
+    "qs": "^6.5.0",
+    "rss-parser": "^3.0.1",
+    "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^22.0.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^4.0.0",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-flowtype": "^2.32.1",
+    "eslint-plugin-import": "^2.0.0",
+    "eslint-plugin-mocha": "^4.9.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.45.0",
+    "jest": "^22.0.4",
+    "jest-cli": "^22.0.4",
+    "regenerator-runtime": "^0.11.1",
+    "rimraf": "^2.6.1"
+  }
+}
