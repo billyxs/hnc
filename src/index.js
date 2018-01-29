@@ -2,6 +2,7 @@
 import inquirer from 'inquirer'
 import chalk from 'chalk'
 import Parser from 'rss-parser'
+import moment from 'moment'
 
 const parser = new Parser()
 
@@ -15,7 +16,7 @@ const getFeed = async () => {
 }
 
 function logArticle(item) {
-  console.log(`${chalk.white(item.pubDate)} - ${chalk.cyan(item.title)}
+  console.log(`${chalk.white(moment(item.pubDate).format('MM-DD hh:mma'))} - ${chalk.cyan(item.title)}
 ${item.link}
 `)
 }
