@@ -15,10 +15,9 @@ const getFeed = async () => {
 
 getFeed()
   .then((res) => {
+    console.log(`${chalk.white('------------------------------')}`)
     res.items.forEach((item) => {
       console.log(`${chalk.cyan(item.title)}
-${item.link}
-${chalk.white(item.pubDate)}
-`)
+${item.link}`)
     })
   })
