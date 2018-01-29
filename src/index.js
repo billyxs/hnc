@@ -15,26 +15,32 @@ const getFeed = async () => {
 }
 
 function logArticle(item) {
-  console.log(`${chalk.cyan(item.title)}
+  console.log(`${chalk.white(item.pubDate)} - ${chalk.cyan(item.title)}
 ${item.link}
-${chalk.white(item.pubDate)}`)
+`)
 }
 
 async function throttleWithPrompt(articles) {
+  console.log(`
+--------------------------------------------`)
   try {
-    articles.slice(0, 10).forEach(logArticle)
+    articles.slice(0, 6).forEach(logArticle)
     const articlesLeft = articles.slice(10)
 
-    const { cont } = await inquirer.prompt({
-      type: 'confirm',
-      name: 'cont',
-      message: 'See more?',
-      when: articlesLeft.length,
-    })
+    if (articlesLeft.length) {
+      const { cont } = await inquirer.prompt({
+        type: 'confirm',
+        name: 'cont',
+        message: 'See more?',
+        when: articlesLeft.length,
+      })
 
-    return cont ?
-      throttleWithPrompt(articlesLeft) :
-      true
+      if (cont) {
+        return throttleWithPrompt(articlesLeft)
+      }
+    }
+
+    return true
   } catch (e) {
     console.log(e)
     return Promise.reject(e)
@@ -43,5 +49,6 @@ async function throttleWithPrompt(articles) {
 
 getFeed()
   .then((res) => {
-    throttleWithPrompt(res)
+    throttleWithPrompt(res.items)
   })
+  .catch(console.log)
